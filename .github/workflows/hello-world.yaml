@@ -1,6 +1,6 @@
 name: Hello World
 
-on: workflow_displatch
+on: workflow_dispatch
 
 jobs:
   say-hello:
