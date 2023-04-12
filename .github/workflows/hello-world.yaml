@@ -3,8 +3,8 @@ name: Hello World
 on: workflow_displatch
 
 jobs:
-say-hello:
-runs-on: ubuntu-latest
-steps:
--name: Say Hi
-run: echo "Hello!!"
+  say-hello:
+    runs-on: ubuntu-latest
+    steps:
+      -name: Say Hi
+      run: echo "Hello!!"
