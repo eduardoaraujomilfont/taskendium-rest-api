@@ -27,7 +27,7 @@
 Create a production enviroment image with the following:
 
 ```bash
-docker build --pul --rm -f "Dockerfile" -t taskendiumapi:latest "."
+docker build --pull --rm -f "Dockerfile" -t taskendiumapi:latest "."
 ```
 
 ## Description
