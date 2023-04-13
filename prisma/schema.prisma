@@ -13,5 +13,5 @@ datasource db {
 model Users {
   id String @id @default(uuid())
   user String @unique
-  password String @unique
+  password String 
 }
