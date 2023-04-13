@@ -1,11 +1,16 @@
 FROM node:latest
 
-WORKDIR /usr/src/api
+WORKDIR /taskendium-rest-api
+
+COPY package*.json ./
+COPY prisma ./prisma/
 
 COPY . .
 COPY ./.env.production ./.env
 
 RUN npm install --quiet --no-optional --no-fund --loglevel=error
+
+RUN npx prisma db push
 
 RUN npm run build
 
