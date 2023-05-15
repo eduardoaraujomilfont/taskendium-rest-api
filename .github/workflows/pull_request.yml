@@ -1,0 +1,10 @@
+name: pull_request
+
+on: [pull_request]
+
+jobs:
+  say-hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Say Hi
+        run: echo "Hello Your Request Is Pending Waiting Manu's Aprove!!"
