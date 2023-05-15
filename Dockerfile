@@ -1,19 +1,21 @@
-FROM node:latest
+FROM node:alpine
 
-WORKDIR /taskendium-rest-api
+WORKDIR /usr/src/app
+
+COPY --from=ghcr.io/ufoscout/docker-compose-wait:latest /wait /wait
 
 COPY package*.json ./
+
 COPY prisma ./prisma/
 
+COPY .env ./
+
+RUN npm install
+
 COPY . .
-COPY ./.env.production ./.env
 
-RUN npm install --quiet --no-optional --no-fund --loglevel=error
-
-RUN npx prisma db push
-
-RUN npm run build
+RUN /wait && npm prisma db push
 
 EXPOSE 3000
 
-CMD ["npm", "run", "start:prod"]
+RUN npm run build
