@@ -1,0 +1,41 @@
+version: '3.9'
+
+services:
+  database:
+    image: postgres
+    ports:
+        - 5432:5432
+    env_file:
+      - .env    
+    environment:
+        - POSTGRES_USERNAME=postgres
+        - POSTGRES_PASSWORD=taskendium123
+        - POSTGRES_DATABASE=postgres
+    networks:
+      - devnetwork
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+  api:
+    depends_on:
+      - database
+    build: 
+      context: .
+      dockerfile: ./Dockerfile
+    env_file:
+      - .env  
+    command: npm run start:dev
+    ports:
+      - "3000:3000"
+    networks:
+      - devnetwork
+    environment:
+      DATABASE_URL: "postgresql://postgres:taskendium123@database:5432/postgres" 
+      WAIT_HOSTS: database:5432
+
+networks:
+  devnetwork:
+    driver: bridge
+    
+
+volumes:
+  postgres-data:
